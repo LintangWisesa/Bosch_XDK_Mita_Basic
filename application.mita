@@ -1,0 +1,13 @@
+/**
+ * Welcome to Eclipse Mita.
+ *
+ * Not sure what to do now?
+ * Check out the "Getting started" guide on https://mita.io.
+ */
+
+package main;
+import platforms.xdk110;
+
+every button_one.pressed {
+	print("Hello World\n");
+}
