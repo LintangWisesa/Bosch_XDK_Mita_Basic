@@ -1,0 +1,14 @@
+package main;
+import platforms.xdk110;
+
+setup Gyroscope_BMI160 {
+  range = Range_250s;
+  bandwidth = BW_10_7Hz;
+}
+
+every 100 milliseconds {
+    var x = gyroscope.x_axis.read();
+    var y = gyroscope.y_axis.read();
+    var z = gyroscope.z_axis.read();
+    println(`x: ${x} y: ${y} z: ${z}  [deg/s]`);
+}
