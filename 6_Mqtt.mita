@@ -1,0 +1,18 @@
+package main;
+import platforms.xdk110;
+
+setup wifi : WLAN {
+    authentication = Personal(psk='myPassword');
+    ssid = 'mySSID';
+}
+
+setup hivemq : MQTT {
+    transport = wifi;
+    url = 'mqtt://broker.hivemq.com:1883';
+    clientId = 'myXdk';
+    var helloWorld = topic('hello/world');
+}
+
+every 5 seconds {
+  hivemq.helloWorld.write('{"hello": "world"}');
+}
