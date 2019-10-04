@@ -1,0 +1,17 @@
+package main;
+import platforms.xdk110;
+
+setup wifi : WLAN {
+  authentication = Personal(psk = "myPassword");
+  ssid = "mySSID";
+}
+
+setup server : HttpRestClient {
+  transport = wifi;
+  endpointBase = 'http://www.my-server/api';
+  var root = resource('/', 'text/plain', POST);
+}
+
+every 5 seconds {
+  server.root.write("myMessageToPost");
+}

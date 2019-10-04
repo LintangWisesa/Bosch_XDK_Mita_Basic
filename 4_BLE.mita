@@ -1,0 +1,12 @@
+package main;
+import platforms.xdk110;
+
+setup ble : BLE {
+  deviceName = "XDK_BLE";
+  macAddress = "FC:D6:BD:00:00:00";
+  var temperature = int32_characteristic(UUID=0x9a66);
+}
+
+every 1 second {
+  ble.temperature.write(environment.temperature.read());
+}
