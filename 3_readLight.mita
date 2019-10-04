@@ -1,0 +1,11 @@
+package main;
+import platforms.xdk110;
+
+setup light {
+    manual_mode = false;
+}
+
+every 100 milliseconds {
+    var light : double = light.intensity.read()/1000.00;
+    println(`${light} lux`);
+}

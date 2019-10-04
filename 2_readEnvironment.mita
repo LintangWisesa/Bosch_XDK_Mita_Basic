@@ -1,0 +1,24 @@
+package main;
+import platforms.xdk110;
+
+// -- correction factor for the XDKs heatoutput
+var tempCorrection = 6.5975;
+
+// -- optional setup of the BME280 environmental sensor
+setup environment {
+    power_mode = Normal;
+    standby_time = 1000; // ms
+    temperature_oversampling = OVERSAMPLE_1X;
+}
+
+every 1 second
+{
+    var humi = environment.humidity.read();
+    var pres : double = environment.pressure.read()/1000.0;
+    var temp : double = environment.temperature.read()/1000.0;
+
+    // -- this corrects for the heat output of a typical running XDK application
+    temp = temp - tempCorrection;
+
+    println(`${humi} %%rh ${pres} kPa ${temp} degC`);
+}
