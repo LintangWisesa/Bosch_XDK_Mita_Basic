@@ -8,6 +8,16 @@ Resource:
 
 #
 
+Getting started:
+1. Download & install XDK Workbench (Use your XDK's serial number)
+2. Open XDK Workbench, choose __Use Eclipse Mita__.
+3. Write your code on __application.mita__.
+4. Plug XDK in while press button 1 to set the XDK into _bootloader_ mode.
+5. Click project application & choose __Project -> Build Project__.
+6. Flash & done!
+
+#
+
 #### Lintang Wisesa :love_letter: _lintangwisesa@ymail.com_
 
 [Facebook](https://www.facebook.com/lintangbagus) | 
