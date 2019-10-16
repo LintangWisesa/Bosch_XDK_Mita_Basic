@@ -2,5 +2,17 @@ package main;
 import platforms.xdk110;
 
 every 1000 milliseconds {
-    println('Hello World!');
+    println('Hello World a second!');
+}
+
+every 3 second {
+    println('Hello World 3 seconds!');
+}
+
+every button_one.pressed {
+    println('This is button 1');
+}
+
+every button_two.pressed {
+    println('This is button 2');
 }
