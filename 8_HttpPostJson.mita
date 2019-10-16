@@ -1,0 +1,20 @@
+package main;
+import platforms.xdk110;
+
+setup wifi : WLAN {
+  authentication = Personal(psk = "myPassword");
+  ssid = "mySSID";
+}
+
+setup server : HttpRestClient {
+  transport = wifi;
+  endpointBase = 'http://192.168.0.122:1234/xdk';
+  var root = resource('/', 'application/json', POST);
+}
+
+every 5 seconds {
+  var x = 2;
+  var json = `{"data":${x}}`;
+  println(json);
+  server.root.write(json);
+}
