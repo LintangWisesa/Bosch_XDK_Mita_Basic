@@ -1,0 +1,20 @@
+package main;
+import platforms.xdk110;
+
+setup pin : GPIO {
+	var out0 = digitalOut(PA0, false);  // led 0 on PA0 with resistor 220ohm
+    var out1 = digitalOut(PA1, false);	// led 1 on PA1 with resistor 220ohm
+}
+
+var toogle = true;
+every 1 second {
+	if(toogle){
+		pin.out0.write(true);
+		pin.out1.write(false);
+		toogle = false;
+	} else {
+		pin.out0.write(false);
+		pin.out1.write(true);
+		toogle = true;
+	}
+}

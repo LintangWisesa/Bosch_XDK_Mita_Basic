@@ -1,0 +1,59 @@
+package main;
+import platforms.xdk110;
+
+setup wifi : WLAN {
+  authentication = Personal(psk = "BoschCoSpace");
+  ssid = "Robert_Bosch_AP01";
+}
+
+setup server : HttpRestClient {
+  transport = wifi;
+  endpointBase = 'http://192.168.0.122:1234/xdk';
+  var root = resource('/', 'application/json', POST);
+}
+
+setup accelerometer {
+    bandwidth = BW_500Hz;
+    range = Range_8G;       // 8G range convienently does not require a conversion into mg
+}
+
+setup Gyroscope_BMI160 {
+  range = Range_250s;
+  bandwidth = BW_10_7Hz;
+}
+
+var tempCorrection = 6.5975;
+setup environment {
+    power_mode = Normal;
+    standby_time = 1000; // ms
+    temperature_oversampling = OVERSAMPLE_1X;
+}
+
+setup light {
+    manual_mode = false;
+}
+
+every 5 seconds {
+  
+  var accx = accelerometer.x_axis.read();
+  var accy = accelerometer.y_axis.read();
+  var accz = accelerometer.z_axis.read();
+  
+  var gyx = gyroscope.x_axis.read();
+  var gyy = gyroscope.y_axis.read();
+  var gyz = gyroscope.z_axis.read();
+  
+  var humi = environment.humidity.read();
+  var pres : double = environment.pressure.read()/1000.0;
+  var temp : double = environment.temperature.read()/1000.0;
+  temp = temp - tempCorrection;
+  var light : double = light.intensity.read()/1000.00;
+
+  var json = `{
+    "accx":${accx}, "accy":${accy}, "accz":${accz}, "gyx":${gyx}, 
+    "gyy":${gyy}, "gyz":${gyz}, "humi":${humi}, "pres":${pres}, 
+    "temp":${temp}, "light":${light}
+    }`;
+  println(json);
+  server.root.write(json);
+}

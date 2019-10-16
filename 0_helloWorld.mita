@@ -2,10 +2,14 @@ package main;
 import platforms.xdk110;
 
 every 1000 milliseconds {
-    println('Hello World a second!');
+    println('Hello World 1000 milliseconds!');
 }
 
-every 3 second {
+every 1 second {
+    println('Hello World 1 second!');
+}
+
+every 3 seconds {
     println('Hello World 3 seconds!');
 }
 

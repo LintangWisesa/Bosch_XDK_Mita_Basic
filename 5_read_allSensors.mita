@@ -23,15 +23,15 @@ setup light {
 }
 
 every 10 second {
-    var a = accelerometer.x_axis.read();
-    var b = accelerometer.y_axis.read();
-    var c = accelerometer.z_axis.read();
-    println(`Accelerometer: \n x: ${a}mg\n y: ${b}mg\n z: ${c}mg`);
+    var accx = accelerometer.x_axis.read();
+    var accy = accelerometer.y_axis.read();
+    var accz = accelerometer.z_axis.read();
+    println(`Accelerometer: \n x: ${accx}mg\n y: ${accy}mg\n z: ${accz}mg`);
     
-    var d = gyroscope.x_axis.read();
-    var e = gyroscope.y_axis.read();
-    var f = gyroscope.z_axis.read();
-    println(`Gyroscope x: ${d} y: ${e} z: ${f}  [deg/s]`);
+    var gyx = gyroscope.x_axis.read();
+    var gyy = gyroscope.y_axis.read();
+    var gyz = gyroscope.z_axis.read();
+    println(`Gyroscope x: ${gyx} y: ${gyy} z: ${gyz}  [deg/s]`);
     
     var humi = environment.humidity.read();
     var pres : double = environment.pressure.read()/1000.0;
