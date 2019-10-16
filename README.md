@@ -5,6 +5,7 @@
 Resource: 
 1. [XDK Bosch Documentation](https://developer.bosch.com/web/xdk/introduction)
 2. [XDK: Getting Started with Mita Programming Language](https://developer.bosch.com/web/xdk/getting-started)
+3. [Eclipse Mita Documentation](https://www.eclipse.org/mita/)
 
 #
 
