@@ -1,0 +1,44 @@
+package main;
+import platforms.xdk110;
+
+setup accelerometer {
+    bandwidth = BW_500Hz;
+    range = Range_8G;       // 8G range convienently does not require a conversion into mg
+}
+
+setup Gyroscope_BMI160 {
+  range = Range_250s;
+  bandwidth = BW_10_7Hz;
+}
+
+var tempCorrection = 6.5975;
+setup environment {
+    power_mode = Normal;
+    standby_time = 1000; // ms
+    temperature_oversampling = OVERSAMPLE_1X;
+}
+
+setup light {
+    manual_mode = false;
+}
+
+every 10 second {
+    var a = accelerometer.x_axis.read();
+    var b = accelerometer.y_axis.read();
+    var c = accelerometer.z_axis.read();
+    println(`Accelerometer: \n x: ${a}mg\n y: ${b}mg\n z: ${c}mg`);
+    
+    var d = gyroscope.x_axis.read();
+    var e = gyroscope.y_axis.read();
+    var f = gyroscope.z_axis.read();
+    println(`Gyroscope x: ${d} y: ${e} z: ${f}  [deg/s]`);
+    
+    var humi = environment.humidity.read();
+    var pres : double = environment.pressure.read()/1000.0;
+    var temp : double = environment.temperature.read()/1000.0;
+    temp = temp - tempCorrection;
+    println(`Humidity ${humi} %%rh Pressure ${pres} kPa Temperature ${temp} degC`);
+    
+    var light : double = light.intensity.read()/1000.00;
+    println(`Light: ${light} lux`);
+}
